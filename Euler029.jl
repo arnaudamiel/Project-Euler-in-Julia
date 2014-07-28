@@ -31,7 +31,7 @@ function solve029()
 
 	result = unique(allNumbers)
 
-	sort!(result)
+	sort!(result) #This is not required to solve the problem but is mentioned
 
 	length(result)
 	
