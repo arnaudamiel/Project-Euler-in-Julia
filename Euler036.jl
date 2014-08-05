@@ -4,22 +4,18 @@
  
 #(Please note that the palindromic number, in either base, may not include leading zeros.)
 
-
-
 function solve036()
 
-counter = 0
+    counter = 0
 
-for i = 1:1000000
-    if (dec(i) == reverse(dec(i))) && (bin(i) == reverse(bin(i)))
-        counter += i
-        #println(i)
+    for i = 1:1000000
+        if (dec(i) == reverse(dec(i))) && (bin(i) == reverse(bin(i)))
+            counter += i
+            #println(i)
+        end
     end
-end
 
 counter
-
-    
 
 end
 
