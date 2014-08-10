@@ -1,0 +1,8 @@
+function number(theDigits)
+    counter = 0
+    for i = 1:length(theDigits)
+        counter *= 10
+        counter += theDigits[i]
+    end
+    counter
+end
