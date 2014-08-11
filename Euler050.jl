@@ -8,11 +8,15 @@
  
 #Which prime, below one-million, can be written as the sum of the most consecutive primes?
 
-function solve050()
+function solve050N(n::Int)
 
-    MAX = 1000000
+    MAX = n
 
-    myPrimes=primes(MAX)
+    if n > 10
+        myPrimes=primes(div(MAX, solve050N(div(n,10))[2] ) )
+    else
+        myPrimes=primes(n)
+    end
 
     maxSum=0
     maxLength=0
@@ -32,7 +36,13 @@ function solve050()
         theBigSum -= myPrimes[i]
     end
 
-    maxSum
+    (maxSum,maxLength+1)
+end
+
+function solve050()
+
+    solve050N(1000000)[1]
+    
 end
 
 solve050()
