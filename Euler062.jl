@@ -42,7 +42,7 @@ function solve062()
     #We search the array for identical sorted cubes
     for i = 1:MAX
         counter = 0
-        for j = i:((10*i > MAX)?MAX:(10*i)) #We don't need to go further as we would have too many digits
+        for j = i:((10*i > MAX)?MAX:(3*i)) #We don't need to go further as we would have too many digits
             if cubes[i] == cubes[j]
                 counter += 1
             end
