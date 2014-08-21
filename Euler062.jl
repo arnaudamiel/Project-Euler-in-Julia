@@ -7,7 +7,6 @@ has exactly three permutations of its digits which are also cube.
  
 Find the smallest cube for which exactly five permutations of its digits are cube.
 
-
 =#
 
 function number(myDigits::Array{Int})
@@ -26,31 +25,36 @@ end
 
 function solve062()
 
-    MAX = int(cbrt(typemax(Int)))
-
     inArow = 5
+    #We prealocate an array for cubes limited to the size of Int
+    #This is way too big but does not take too much memory
+    cubes = Array(Int,int(cbrt(typemax(Int))))
 
-    #We create an array of sorted digits of all the cubes
-    #We could speed thinsg up by increasing the array as needed
+    #We will start with 8 digits cubes as we know we need at least that many
+    for myDigits = 8:ndigits(typemax(Int))
 
-    cubes = Array(Int,MAX)
-    
-    for i = 1:MAX
-        cubes[i] = number(sort!(digits(i*i*i)))
-    end
+        #All candidate numbers need the same number of digits
+        MIN = ifloor(cbrt(10^(myDigits-1)))
+        MAX = iceil(cbrt(10^myDigits - 1))
 
-    #We search the array for identical sorted cubes
-    for i = 1:MAX
-        counter = 0
-        for j = i:((10*i > MAX)?MAX:(3*i)) #We don't need to go further as we would have too many digits
-            if cubes[i] == cubes[j]
-                counter += 1
-            end
+        #We create an array of cubes with sorted digits
+        for i = MIN:MAX
+            cubes[i] = number(sort!(digits(i*i*i)))
         end
 
-        #We found our solution
-        if counter == inArow
-            return( i*i*i )
+        #We search the array for identical sorted cubes
+        for i = MIN:MAX
+            counter = 0
+            for j = i:MAX
+                if cubes[i] == cubes[j]
+                    counter += 1
+                end
+            end
+
+            #We found our solution
+            if counter == inArow
+                return( i*i*i )
+            end
         end
     end
 
