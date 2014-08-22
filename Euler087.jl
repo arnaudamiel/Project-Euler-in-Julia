@@ -59,5 +59,4 @@ function solve087()
 end
 
 using Base.Test
-
-#@test solve087() == 1097343
+@test solve087() == 1097343
