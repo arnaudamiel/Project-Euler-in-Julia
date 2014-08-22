@@ -1,4 +1,4 @@
-Enter file contents here#= Totient maximum
+#= Totient maximum
 Problem 69
 
 Euler's Totient function, φ(n) [sometimes called the phi function], is 
