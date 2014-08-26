@@ -7,7 +7,7 @@
 function solve022()
 
 	const ASCIIOffset=int('A'-1)
-	rawNames=readcsv("names.txt",String)
+	rawNames=readcsv("p022_names.txt",String)
 
 	for i in 1:size(rawNames)[2]
 		rawNames[i]=strip(rawNames[i],'\"')

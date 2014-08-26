@@ -14,7 +14,7 @@ end
 
 function solve042()
 	const ASCIIOffset=int('A'-1)
-	theWords=readcsv("words.txt",String)
+	theWords=readcsv("p042_words.txt",String)
 
 	for i in 1:size(theWords)[2]
 		theWords[i]=strip(theWords[i],'\"')
