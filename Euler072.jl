@@ -13,24 +13,14 @@ How many elements would be contained in the set of reduced proper fractions for 
 
 =#
 
-function phi(n::Int)
-
-    counter = n
-
-    for p in keys(factor(n))
-        counter *= 1 -1/p
-    end
-
-    counter
-
-end
-
 function solve072()
+
+    require("Euler072Support.jl")
 
     counter = 0
 
-    for i = 2:1000000
-        counter += phi(i)
+    counter = @parallel (+) for i = 2:1000000
+        phi(i)
     end
 
     counter
