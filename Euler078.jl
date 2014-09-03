@@ -25,7 +25,7 @@ Find the least value of n for which p(n) is divisible by one million.
 
 #From http://en.wikipedia.org/wiki/Pentagonal_number_theorem
 
-#= Function that calculates the exact value of partitions
+#= Function that calculates the exact value of partitions =#
 
 function Npartitions(n::Int)
 
@@ -60,8 +60,6 @@ function Npartitions(n::Int)
     p[n+1]
 
 end
-
-=#
 
 function solve078()
 
