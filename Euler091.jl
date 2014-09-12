@@ -20,8 +20,6 @@ Given that 0 ≤ x1, y1, x2, y2 ≤ 50, how many right triangles can be formed?
 
 =#
 
-using Base.sumabs2
-
 function solve091()
 
     count = 0
