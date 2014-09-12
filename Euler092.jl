@@ -14,8 +14,6 @@ How many starting numbers below ten million will arrive at 89?
 
 =#
 
-using Base.sumabs2
-
 function solve092()
 
     count = 0
