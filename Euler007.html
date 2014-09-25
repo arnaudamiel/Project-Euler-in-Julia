@@ -1,0 +1,83 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<title>Project Euler 007</title>
+
+<script language="Javascript">
+
+function calculate()
+{
+ document.getElementById('result').innerHTML="Calculating ..."
+ setTimeout(function(){startSolver()},1);
+ 
+}
+
+function startSolver()
+{
+ var start = new Date().getTime();
+ var result = solve007();
+ var end = new Date().getTime();
+ var time = end - start;
+ document.getElementById('result').innerHTML="Found : "+result+" in "+time+" ms";
+}
+
+function isPrime(n)
+{
+ if (n==1)
+  return false;
+ else if (n<4) //2 and 3 are prime
+  return true;
+ else if (n%2 == 0)
+  return false;
+ else if (n<9) //we have already excluded 4,6 and 8.
+  return true;
+ else if (n%3 == 0)
+  return false;
+ else
+ {
+  var r = Math.floor(Math.sqrt(n)); //sqrt(n) rounded to the greatest integer r so that r*r<=n
+  var f = 5;
+  while (f<=r)
+  {
+   if (n%f == 0)
+    return false;
+   if (n%(f+2) == 0)
+    return false;
+
+   f +=6;
+  }
+  return true;
+ }
+}
+
+function solve007()
+{
+ var solveTo = 10001;
+ var count = 1;
+ var candidate = 1;
+
+ do
+ {
+  candidate +=2;
+  if (isPrime(candidate))
+   count++;
+ }
+ while (count != solveTo)
+ 
+ return candidate;
+}
+
+</script>
+
+</head>
+<body>
+<h1>10001st prime</h1>
+<h2>Problem 7</h2>
+<div id="problem">
+<p>By listing the first six prime numbers: 2, 3, 5, 7, 11, and 13, we can see that the 6th prime is 13.</p>
+<p>What is the 10 001st prime number?</p>
+</div>
+<div id="result"></div>
+<button onclick="calculate()">Click to calculate solution</button>
+</body>
+</html>

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Project Euler 003</title>
+
+<script language="Javascript">
+
+function calculate()
+{
+ document.getElementById('result').innerHTML="Calculating ..."
+ setTimeout(function(){startSolver()},1);
+ 
+}
+
+function startSolver()
+{
+ var start = new Date().getTime();
+ var result = solve003();
+ var end = new Date().getTime();
+ var time = end - start;
+ document.getElementById('result').innerHTML="Found : "+result+" in "+time+" ms";
+}
+
+function solve003()
+{
+ var solveTo = 600851475143;
+ var lastFactor = 1;
+
+ if (solveTo % 2 == 0)
+ {
+   lastFactor = 2;
+   solveTo /= 2;
+
+   while (solveTo % 2 == 0)
+    solveTo /= 2;
+  }
+  else
+   lastFactor = 1;
+
+ var factor = 3;
+ var maxFactor = Math.floor(Math.sqrt(solveTo))
+
+ while ( (solveTo > 1) && (factor<=maxFactor) )
+ {
+  if (solveTo % factor == 0)
+  {
+   solveTo /= factor;
+   lastFactor = factor;
+
+   while (solveTo % factor == 0)
+    solveTo /= factor;
+  }
+
+  factor += 2;
+ }
+
+ if (solveTo == 1)
+  return lastFactor;
+ else
+  return solveTo;
+
+}
+
+</script>
+
+</head>
+<body>
+<h1>Largest prime factor</h1>
+<h2>Problem 3</h2>
+<div id="problem">
+<p>The prime factors of 13195 are 5, 7, 13 and 29.</p>
+<p>What is the largest prime factor of the number 600851475143 ?</p>
+</div>
+<div id="result"></div>
+<button onclick="calculate()">Click to calculate solution</button>
+</body>
+</html>

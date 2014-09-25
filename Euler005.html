@@ -1,0 +1,94 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<title>Project Euler 005</title>
+
+<script language="Javascript">
+
+function calculate()
+{
+ document.getElementById('result').innerHTML="Calculating ..."
+ setTimeout(function(){startSolver()},1);
+ 
+}
+
+function startSolver()
+{
+ var start = new Date().getTime();
+ var result = solve005();
+ var end = new Date().getTime();
+ var time = end - start;
+ document.getElementById('result').innerHTML="Found : "+result+" in "+time+" ms";
+}
+
+function eratosthenes(limit)
+{
+ var primes = [];
+ if (limit >= 2)
+ {
+  var sqrtlmt = Math.sqrt(limit) - 2;
+  var nums = new Array(); // start with an empty Array...
+  for (var i = 2; i <= limit; i++) // and
+   nums.push(i); // only initialize the Array once...
+  for (var i = 0; i <= sqrtlmt; i++)
+  {
+   var p = nums[i]
+   if (p)
+    for (var j = p * p - 2; j < nums.length; j += p)
+     nums[j] = 0;
+  }
+  for (var i = 0; i < nums.length; i++)
+  {
+   var p = nums[i];
+   if (p)
+    primes.push(p);
+  }
+ }
+ return primes;
+}
+
+
+function solve005()
+{
+ var solveTo = 20;
+ var p = eratosthenes(solveTo);
+ var a = [];
+ var N = 1;
+ var i = 0;
+ var check = true;
+ var limit = Math.sqrt(solveTo);
+
+ while (p[i] <= solveTo)
+ {
+  a[i]=1;
+
+  if (check)
+  {  
+   if (p[i] <= limit)
+    a[i] = Math.floor( Math.log(solveTo) / Math.log(p[i]) );
+   else
+    check = false;
+  }
+
+  N *= Math.pow(p[i],a[i]);
+  i++;
+ }
+ 
+ return N;
+
+}
+
+</script>
+
+</head>
+<body>
+<h1>Smallest multiple</h1>
+<h2>Problem 5</h2>
+<div id="problem">
+<p>2520 is the smallest number that can be divided by each of the numbers from 1 to 10 without any remainder.</p>
+<p>What is the smallest positive number that is <dfn title="divisible with no remainder">evenly divisible</dfn> by all of the numbers from 1 to 20?</p>
+</div>
+<div id="result"></div>
+<button onclick="calculate()">Click to calculate solution</button>
+</body>
+</html>

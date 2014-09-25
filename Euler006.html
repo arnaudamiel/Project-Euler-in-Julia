@@ -1,0 +1,52 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<title>Project Euler 006</title>
+
+<script language="Javascript">
+
+function calculate()
+{
+ document.getElementById('result').innerHTML="Calculating ..."
+ setTimeout(function(){startSolver()},1);
+ 
+}
+
+function startSolver()
+{
+ var start = new Date().getTime();
+ var result = solve006();
+ var end = new Date().getTime();
+ var time = end - start;
+ document.getElementById('result').innerHTML="Found : "+result+" in "+time+" ms";
+}
+
+function solve006()
+{
+ var solveTo = 100;
+ var sum = solveTo*(solveTo+1)/2;
+ var sum_sq = (2*solveTo +1)*(solveTo+1)*solveTo/6;
+
+ return (sum*sum-sum_sq); 
+
+}
+
+</script>
+
+</head>
+<body>
+<h1>Sum square difference</h1>
+<h2>Problem 6</h2>
+<div id="problem">
+<p>The sum of the squares of the first ten natural numbers is,</p>
+<div style="text-align:center">1<sup>2</sup> + 2<sup>2</sup> + ... + 10<sup>2</sup> = 385</div>
+<p>The square of the sum of the first ten natural numbers is,</p>
+<div style="text-align:center">(1 + 2 + ... + 10)<sup>2</sup> = 55<sup>2</sup> = 3025</div>
+<p>Hence the difference between the sum of the squares of the first ten natural numbers and the square of the sum is 3025 &minus; 385 = 2640.</p>
+<p>Find the difference between the sum of the squares of the first one hundred natural numbers and the square of the sum.</p>
+
+</div>
+<div id="result"></div>
+<button onclick="calculate()">Click to calculate solution</button>
+</body>
+</html>
