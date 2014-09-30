@@ -1,0 +1,70 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<title>Project Euler 016</title>
+
+<script language="Javascript">
+
+function calculate()
+{
+ document.getElementById('result').innerHTML="Calculating ..."
+ setTimeout(function(){startSolver()},1);
+ 
+}
+
+function startSolver()
+{
+ var start = new Date().getTime();
+ var result = solve016();
+ var end = new Date().getTime();
+ var time = end - start;
+ document.getElementById('result').innerHTML="Found : "+result+" in "+time+" ms";
+}
+
+
+function solve016()
+{
+ var myDigits = [];
+
+ myDigits[0] = 2;
+ 
+ for (var i = 1; i < 1000; i++)
+ {
+  var carry = 0;
+  for (j = 0; j < myDigits.length; j++)
+  {
+   myDigits[j] *= 2;
+   myDigits[j] += carry;
+   if (myDigits[j] >= 10)
+   {
+    myDigits[j] -= 10;
+    carry = 1;
+   }
+   else
+    carry = 0;
+  }
+  if (carry == 1)
+   myDigits[myDigits.length] = 1;
+ }
+
+ var counter = 0;
+ for (var i=0; i < myDigits.length; i++)
+  counter += myDigits[i];
+
+ return counter;
+}
+
+</script>
+
+</head>
+<body>
+<h1>Power digit sum</h1>
+<h2>Problem 16</h2>
+<div id="problem">
+<p>2<sup>15</sup> = 32768 and the sum of its digits is 3 + 2 + 7 + 6 + 8 = 26.</p>
+<p>What is the sum of the digits of the number 2<sup>1000</sup>?</p>
+</div>
+<div id="result"></div>
+<button onclick="calculate()">Click to calculate solution</button>
+</body>
+</html>

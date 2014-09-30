@@ -1,0 +1,53 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<title>Project Euler 015</title>
+
+<script language="Javascript">
+
+function calculate()
+{
+ document.getElementById('result').innerHTML="Calculating ..."
+ setTimeout(function(){startSolver()},1);
+ 
+}
+
+function startSolver()
+{
+ var start = new Date().getTime();
+ var result = solve015();
+ var end = new Date().getTime();
+ var time = end - start;
+ document.getElementById('result').innerHTML="Found : "+result+" in "+time+" ms";
+}
+
+
+function solve015()
+{
+ var solveTo = 20;
+ var result = 1;
+
+ for (var i=1; i <= solveTo; i++)
+  result *= (solveTo+i)/i;
+ 
+ return Math.round(result);
+
+}
+
+</script>
+
+</head>
+<body>
+<h1>Lattice paths</h1>
+<h2>Problem 15</h2>
+<div id="problem">
+<p>Starting in the top left corner of a 2&times;2 grid, and only being able to move to the right and down, there are exactly 6 routes to the bottom right corner.</p>
+<div style="text-align:center;">
+<img src="p015.gif" alt="" />
+</div>
+<p>How many such routes are there through a 20&times;20 grid?</p>
+</div>
+<div id="result"></div>
+<button onclick="calculate()">Click to calculate solution</button>
+</body>
+</html>

@@ -1,0 +1,109 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<title>Project Euler 009</title>
+
+<script language="Javascript">
+
+function calculate()
+{
+ document.getElementById('result').innerHTML="Calculating ..."
+ setTimeout(function(){startSolver()},1);
+ 
+}
+
+function startSolver()
+{
+ var start = new Date().getTime();
+ var result = solve009();
+ var end = new Date().getTime();
+ var time = end - start;
+ document.getElementById('result').innerHTML="Found : "+result+" in "+time+" ms";
+}
+
+function gcd(a,b)
+{
+ if (a < 0)
+  a = -a;
+
+ if (b < 0)
+  b = -b;
+
+ if (b > a)
+ {
+  var temp = a;
+  a = b;
+  b = temp;
+ }
+
+ while (true)
+ {
+  a %= b;
+  if (a == 0)
+   return b;
+  b %= a;
+  if (b == 0)
+   return a;
+ }
+}
+
+
+function solve009()
+{
+ var solveTo = 1000;
+
+ var s2 = Math.floor(solveTo/2);
+ var mlimit = Math.ceil(Math.sqrt(s2))-1;
+
+ for (var m = 2; m <= mlimit; m++)
+ {
+  if (s2 % m == 0)
+  {
+   var sm = s2 / m;
+
+   while (sm % 2 == 0) //reduce the search space by
+    sm /= 2; //removing all factors 2
+
+   if (m % 2 == 1)
+    var k = m+2;
+   else
+    var k = m+1;
+
+   while ( (k < 2+m) && (k <= sm) )
+   {
+    if ( (sm % k == 0) && (gcd(k,m) == 1))
+    {
+     var d = s2/(k*m);
+     var n = k-m;
+     var a = d*(m*m - n*n);
+     var b = 2*d*m*n;
+     var c = d*(m*m + n*n)
+
+     return (a*b*c);
+    }
+    k +=2;
+   }
+
+  }
+
+ }
+
+}
+
+</script>
+
+</head>
+<body>
+<h1>Special Pythagorean triplet</h1>
+<h2>Problem 9</h2>
+<div id="problem">
+<p>A Pythagorean triplet is a set of three natural numbers, <var>a</var> &lt; <var>b</var> &lt; <var>c</var>, for which,</p>
+<div style="text-align:center;"> <var>a</var><sup>2</sup> + <var>b</var><sup>2</sup> = <var>c</var><sup>2</sup></div>
+<p>For example, 3<sup>2</sup> + 4<sup>2</sup> = 9 + 16 = 25 = 5<sup>2</sup>.</p>
+<p>There exists exactly one Pythagorean triplet for which <var>a</var> + <var>b</var> + <var>c</var> = 1000.<br />Find the product <var>abc</var>.</p>
+
+</div>
+<div id="result"></div>
+<button onclick="calculate()">Click to calculate solution</button>
+</body>
+</html>
