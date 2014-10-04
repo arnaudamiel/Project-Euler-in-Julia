@@ -1,0 +1,82 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<title>Project Euler 030</title>
+
+<meta http-equiv="X-UA-Compatible" content="IE=Edge"/>
+
+<script language="Javascript">
+
+function calculate() {
+
+    document.getElementById('result').innerHTML="Calculating ..."
+    setTimeout(function(){startSolver()},1);
+ 
+}
+
+function startSolver() {
+
+    var start = new Date().getTime();
+
+    var result = solve030();
+
+    var end = new Date().getTime();
+    var time = end - start;
+
+    document.getElementById('result').innerHTML="Found : "+result+" in "+time+" ms";
+
+}
+
+
+function solve030() {
+
+    var solveTo = 6*Math.pow(9,5);
+    var result = 0;
+
+    for (var i =2; i < solveTo; i++) {
+
+        var sumOfPowers = 0;
+        var number = i;
+
+        while (number > 0) {
+
+            var d = number % 10;
+            number = Math.floor(number/10);
+
+            var temp = d;
+
+            for (var j=1; j < 5; j++)
+                temp *= d;
+
+            sumOfPowers += temp;
+
+        }
+
+        if (sumOfPowers == i)
+            result += i;
+
+    }
+
+    return result;
+
+}
+
+</script>
+
+</head>
+<body>
+<h1>Digit fifth powers</h1>
+<h2>Problem 30</h2>
+<div id="problem">
+<p>Surprisingly there are only three numbers that can be written as the sum of fourth powers of their digits:</p>
+<blockquote>1634 = 1<sup>4</sup> + 6<sup>4</sup> + 3<sup>4</sup> + 4<sup>4</sup><br />
+8208 = 8<sup>4</sup> + 2<sup>4</sup> + 0<sup>4</sup> + 8<sup>4</sup><br />
+9474 = 9<sup>4</sup> + 4<sup>4</sup> + 7<sup>4</sup> + 4<sup>4</sup></blockquote>
+<p class='info'>As 1 = 1<sup>4</sup> is not a sum it is not included.</p>
+<p>The sum of these numbers is 1634 + 8208 + 9474 = 19316.</p>
+<p>Find the sum of all the numbers that can be written as the sum of fifth powers of their digits.</p>
+</div>
+<div id="result"></div>
+<button onclick="calculate()">Click to calculate solution</button>
+</body>
+</html>

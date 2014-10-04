@@ -5,29 +5,33 @@
 
 <script language="Javascript">
 
-function calculate()
-{
- document.getElementById('result').innerHTML="Calculating ..."
- setTimeout(function(){startSolver()},1);
+function calculate() {
+
+    document.getElementById('result').innerHTML="Calculating ..."
+    setTimeout(function(){startSolver()},1);
  
 }
 
-function startSolver()
-{
- var start = new Date().getTime();
- var result = solve006();
- var end = new Date().getTime();
- var time = end - start;
- document.getElementById('result').innerHTML="Found : "+result+" in "+time+" ms";
+function startSolver() {
+
+    var start = new Date().getTime();
+
+    var result = solve006();
+
+    var end = new Date().getTime();
+    var time = end - start;
+
+    document.getElementById('result').innerHTML="Found : "+result+" in "+time+" ms";
+
 }
 
-function solve006()
-{
- var solveTo = 100;
- var sum = solveTo*(solveTo+1)/2;
- var sum_sq = (2*solveTo +1)*(solveTo+1)*solveTo/6;
+function solve006() {
 
- return (sum*sum-sum_sq); 
+    var solveTo = 100;
+    var sum = solveTo*(solveTo+1)/2;
+    var sum_sq = (2*solveTo +1)*(solveTo+1)*solveTo/6;
+
+    return (sum*sum-sum_sq); 
 
 }
 

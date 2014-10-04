@@ -1,0 +1,102 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<title>Project Euler 021</title>
+
+<script language="Javascript">
+
+function calculate() {
+
+    document.getElementById('result').innerHTML="Calculating ..."
+    setTimeout(function(){startSolver()},1);
+ 
+}
+
+function startSolver() {
+
+    var start = new Date().getTime();
+
+    var result = solve021();
+
+    var end = new Date().getTime();
+    var time = end - start;
+
+    document.getElementById('result').innerHTML="Found : "+result+" in "+time+" ms";
+
+}
+
+function SumOfDivisors(n) {
+
+    var sum = 1;
+    var p = 2;
+
+    while ((p*p <= n)&&(n > 1)) {
+
+        if (n % p == 0) {
+
+            var j = p*p;
+            n /= p;
+
+            while (n % p == 0) {
+
+                j *= p;
+                n /= p;
+            }
+
+            sum *=(j-1);
+            sum /=(p-1);
+        }
+
+        if (p == 2)
+            p = 3;
+        else
+            p += 2;
+    }
+
+    if (n > 1)
+        sum *= (n+1);
+
+    return sum;
+
+}
+
+function SumOfProperDivisors(n) {
+
+    return SumOfDivisors(n)-n;
+
+}
+
+
+function solve021() {
+
+    var solveTo = 10000;
+    var sum = 0;
+
+    for (var a=2; a < solveTo; a++) {
+
+        var b = SumOfProperDivisors(a);
+
+        if ( (b > a) && (SumOfProperDivisors(b) == a) )
+            sum += (a+b);
+    }
+
+    return sum;
+ 
+}
+
+</script>
+
+</head>
+<body>
+<h1>Amicable numbers</h1>
+<h2>Problem 21</h2>
+<div id="problem">
+<p>Let d(<i>n</i>) be defined as the sum of proper divisors of <i>n</i> (numbers less than <i>n</i> which divide evenly into <i>n</i>).<br />
+If d(<i>a</i>) = <i>b</i> and d(<i>b</i>) = <i>a</i>, where <i>a</i> &ne; <i>b</i>, then <i>a</i> and <i>b</i> are an amicable pair and each of <i>a</i> and <i>b</i> are called amicable numbers.</p>
+<p>For example, the proper divisors of 220 are 1, 2, 4, 5, 10, 11, 20, 22, 44, 55 and 110; therefore d(220) = 284. The proper divisors of 284 are 1, 2, 4, 71 and 142; so d(284) = 220.</p>
+<p>Evaluate the sum of all the amicable numbers under 10000.</p>
+</div>
+<div id="result"></div>
+<button onclick="calculate()">Click to calculate solution</button>
+</body>
+</html>

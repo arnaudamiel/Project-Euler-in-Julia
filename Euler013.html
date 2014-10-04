@@ -5,43 +5,47 @@
 
 <script language="Javascript">
 
-function calculate()
-{
- document.getElementById('result').innerHTML="Calculating ..."
- setTimeout(function(){startSolver()},1);
+function calculate() {
+
+    document.getElementById('result').innerHTML="Calculating ..."
+    setTimeout(function(){startSolver()},1);
  
 }
 
-function startSolver()
-{
- var start = new Date().getTime();
- var result = solve013();
- var end = new Date().getTime();
- var time = end - start;
- document.getElementById('result').innerHTML="Found : "+result+" in "+time+" ms";
+function startSolver() {
+
+    var start = new Date().getTime();
+
+    var result = solve013();
+
+    var end = new Date().getTime();
+    var time = end - start;
+
+    document.getElementById('result').innerHTML="Found : "+result+" in "+time+" ms";
+
 }
 
 
-function solve013()
-{
- var theNumbers = document.getElementById('theNumbers').innerText || document.getElementById('theNumbers').textContent;
- var theLines = theNumbers.split("\r\n"); 
- var numbers = [];
+function solve013() {
 
- for (var i = 0; i < theLines.length; i++)
-  numbers[i] = parseInt(theLines[i]);
+    var theNumbers = document.getElementById('theNumbers').innerText || document.getElementById('theNumbers').textContent;
+    var theLines = theNumbers.split("\r\n"); 
+    var numbers = [];
 
- var counter = 0;
+    for (var i = 0; i < theLines.length; i++)
+        numbers[i] = parseInt(theLines[i]);
 
- for (var i = 0; i < numbers.length; i++)
-  counter += numbers[i];
+    var counter = 0;
 
- while (Math.log(counter)/Math.log(10) > 10)
-  counter /= 10;
+    for (var i = 0; i < numbers.length; i++)
+        counter += numbers[i];
 
- counter = Math.floor(counter);
+    while (Math.log(counter)/Math.log(10) > 10)
+        counter /= 10;
+
+    counter = Math.floor(counter);
  
- return counter;
+    return counter;
 
 }
 

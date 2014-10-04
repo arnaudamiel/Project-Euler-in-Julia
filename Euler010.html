@@ -5,60 +5,71 @@
 
 <script language="Javascript">
 
-function calculate()
-{
- document.getElementById('result').innerHTML="Calculating ..."
- setTimeout(function(){startSolver()},1);
+function calculate() {
+
+    document.getElementById('result').innerHTML="Calculating ..."
+    setTimeout(function(){startSolver()},1);
  
 }
 
-function startSolver()
-{
- var start = new Date().getTime();
- var result = solve010();
- var end = new Date().getTime();
- var time = end - start;
- document.getElementById('result').innerHTML="Found : "+result+" in "+time+" ms";
+function startSolver() {
+
+    var start = new Date().getTime();
+
+    var result = solve010();
+
+    var end = new Date().getTime();
+    var time = end - start;
+
+    document.getElementById('result').innerHTML="Found : "+result+" in "+time+" ms";
+
 }
 
-function eratosthenes(limit)
-{
- var primes = [];
- if (limit >= 2)
- {
-  var sqrtlmt = Math.sqrt(limit) - 2;
-  var nums = new Array(); // start with an empty Array...
-  for (var i = 2; i <= limit; i++) // and
-   nums.push(i); // only initialize the Array once...
-  for (var i = 0; i <= sqrtlmt; i++)
-  {
-   var p = nums[i]
-   if (p)
-    for (var j = p * p - 2; j < nums.length; j += p)
-     nums[j] = 0;
-  }
-  for (var i = 0; i < nums.length; i++)
-  {
-   var p = nums[i];
-   if (p)
-    primes.push(p);
-  }
- }
- return primes;
+function eratosthenes(limit) {
+
+    var primes = [];
+
+    if (limit >= 2) {
+
+        var sqrtlmt = Math.sqrt(limit) - 2;
+        var nums = new Array(); // start with an empty Array...
+        for (var i = 2; i <= limit; i++) // and
+            nums.push(i); // only initialize the Array once...
+
+        for (var i = 0; i <= sqrtlmt; i++) {
+
+            var p = nums[i]
+
+            if (p)
+                for (var j = p * p - 2; j < nums.length; j += p)
+                    nums[j] = 0;
+        }
+
+        for (var i = 0; i < nums.length; i++) {
+
+            var p = nums[i];
+
+            if (p)
+                primes.push(p);
+        }
+    }
+
+    return primes;
+
 }
 
-function solve010()
-{
- var solveTo = 2000000;
+function solve010() {
 
- myPrimes = eratosthenes(solveTo)
+    var solveTo = 2000000;
 
- var counter = 0;
+    myPrimes = eratosthenes(solveTo)
 
- for (var i = 0; i < myPrimes.length; i++)
-  counter += myPrimes[i];
+    var counter = 0;
 
- return counter;
+    for (var i = 0; i < myPrimes.length; i++)
+        counter += myPrimes[i];
+
+    return counter;
 
 }
 

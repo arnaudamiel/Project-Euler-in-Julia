@@ -5,97 +5,106 @@
 
 <script language="Javascript">
 
-function calculate()
-{
- document.getElementById('result').innerHTML="Calculating ..."
- setTimeout(function(){startSolver()},1);
- 
+function calculate() {
+
+    document.getElementById('result').innerHTML="Calculating ..."
+    setTimeout(function(){startSolver()},1);
+
 }
 
-function startSolver()
-{
- var start = new Date().getTime();
- var result = solve011();
- var end = new Date().getTime();
- var time = end - start;
- document.getElementById('result').innerHTML="Found : "+result+" in "+time+" ms";
+function startSolver() {
+
+    var start = new Date().getTime();
+
+    var result = solve011();
+
+    var end = new Date().getTime();
+    var time = end - start;
+
+    document.getElementById('result').innerHTML="Found : "+result+" in "+time+" ms";
+
 }
 
-function solve011()
-{
- var inArow = 4;
+function solve011() {
 
- var theGrid = document.getElementById('theGrid').innerText || document.getElementById('theGrid').textContent;
- var theLines = theGrid.split("\r\n");
- var theGrid = [[]];
- var theDigits = [[]];
+    var inArow = 4;
 
- var product =1;
- var MAXproduct = 1;
+    var theGrid = document.getElementById('theGrid').innerText || document.getElementById('theGrid').textContent;
+    var theLines = theGrid.split("\r\n");
 
- for (var i=0; i < theLines.length; i++)
-  theGrid[i] = theLines[i].split(" ");
+    var theGrid = [[]];
+    var theDigits = [[]];
 
- for (var i=0; i < theGrid.length; i++)
- {
-  theDigits[i] = new Array()
-  for (var j=0; j < theGrid[i].length; j++)
-   theDigits[i][j] = parseInt(theGrid[i][j],10);
- }
+    var product =1;
+    var MAXproduct = 1;
 
- var smallGrid=new Array(inArow);
- for (var i=0; i <inArow; i++)
-  smallGrid[i]=new Array(inArow);
+    for (var i=0; i < theLines.length; i++)
+        theGrid[i] = theLines[i].split(" ");
 
- for (var i=0; i < theDigits.length-inArow+1; i++)
-  for (var j=0; j < theDigits.length-inArow+1; j++)
-   {
-    for (var k=0; k < inArow; k++)
-     for (var l=0; l < inArow; l++)
-      smallGrid[k][l] = theDigits[i+k][j+l];
+    for (var i=0; i < theGrid.length; i++) {
 
-    for (var k=0; k < inArow; k++)
-    {
-     product = 1;
+        theDigits[i] = new Array()
 
-     for (var l=0; l < inArow; l++)
-      product *= smallGrid[k][l];
-
-     if (product > MAXproduct)
-      MAXproduct = product;
-      
+        for (var j=0; j < theGrid[i].length; j++)
+            theDigits[i][j] = parseInt(theGrid[i][j],10);
     }
 
-    for (var k=0; k < inArow; k++)
-    {
-     product = 1;
+    var smallGrid=new Array(inArow);
 
-     for (var l=0; l < inArow; l++)
-      product *= smallGrid[l][k];
+    for (var i=0; i <inArow; i++)
+        smallGrid[i]=new Array(inArow);
 
-     if (product > MAXproduct)
-      MAXproduct = product;
+    for (var i=0; i < theDigits.length-inArow+1; i++)
+        for (var j=0; j < theDigits.length-inArow+1; j++) {
+
+            for (var k=0; k < inArow; k++)
+                for (var l=0; l < inArow; l++)
+                    smallGrid[k][l] = theDigits[i+k][j+l];
+
+            for (var k=0; k < inArow; k++) {
+
+                product = 1;
+
+                for (var l=0; l < inArow; l++)
+                    product *= smallGrid[k][l];
+
+                if (product > MAXproduct)
+                    MAXproduct = product;
       
-    }
+            }
 
-    product = 1;
-    for (var k=0; k < inArow; k++)
-     product *= smallGrid[k][k];
+            for (var k=0; k < inArow; k++) {
 
-    if (product > MAXproduct)
-     MAXproduct = product;
+                product = 1;
 
-    product = 1;
-    for (var k=0; k < inArow; k++)
-     product *= smallGrid[inArow - k - 1][k];
+                for (var l=0; l < inArow; l++)
+                    product *= smallGrid[l][k];
 
-    if (product > MAXproduct)
-     MAXproduct = product;
+                if (product > MAXproduct)
+                    MAXproduct = product;
+      
+            }
+
+           product = 1;
+
+           for (var k=0; k < inArow; k++)
+               product *= smallGrid[k][k];
+
+           if (product > MAXproduct)
+               MAXproduct = product;
+
+           product = 1;
+
+           for (var k=0; k < inArow; k++)
+               product *= smallGrid[inArow - k - 1][k];
+
+           if (product > MAXproduct)
+               MAXproduct = product;
 
 
-   }
+        }
 
- return MAXproduct;
+    return MAXproduct;
 
 }
 

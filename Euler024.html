@@ -1,0 +1,101 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<title>Project Euler 024</title>
+
+<script language="Javascript">
+
+function calculate() {
+
+    document.getElementById('result').innerHTML="Calculating ..."
+    setTimeout(function(){startSolver()},1);
+ 
+}
+
+function startSolver() {
+
+    var start = new Date().getTime();
+
+    var result = solve024();
+
+    var end = new Date().getTime();
+    var time = end - start;
+
+    document.getElementById('result').innerHTML="Found : "+result+" in "+time+" ms";
+}
+
+function factorial(n) {
+
+    var counter = 1;
+
+    for (var i=2; i <= n; i++)
+        counter *= i;
+
+    return counter;
+
+}
+
+function nthperm(v,k) {
+
+    k-=1;
+    var n = v.length;
+
+    if (n==1)
+       return v;
+
+    var f = factorial(n-1);
+
+    for (var i=1; i < n; i++) {
+
+       var j = Math.floor(k/f)+1;
+
+       k %= f;
+       f = Math.floor(f/(n-i));
+
+       j += i-1;
+
+       var elt = v[j-1];
+
+       for (var d = j; d > i; d--)
+           v[d-1] = v[d-2];
+
+       v[i-1] = elt;
+    }
+
+    return v;
+
+}
+
+function solve024() {
+
+    var solveTo= 1000000;
+ 
+    var solution = nthperm([0, 1, 2, 3, 4, 5, 6, 7, 8, 9],solveTo);
+
+    var displayedSol = 0;
+
+    for (var i = 0; i < solution.length; i++) {
+
+        displayedSol *= 10;
+        displayedSol += solution[i];
+
+    }
+
+    return displayedSol;
+}
+
+</script>
+
+</head>
+<body>
+<h1>Lexicographic permutations</h1>
+<h2>Problem 24</h2>
+<div id="problem">
+<p>A permutation is an ordered arrangement of objects. For example, 3124 is one possible permutation of the digits 1, 2, 3 and 4. If all of the permutations are listed numerically or alphabetically, we call it lexicographic order. The lexicographic permutations of 0, 1 and 2 are:</p>
+<p style='text-align:center;'>012&nbsp; &nbsp;021&nbsp; &nbsp;102&nbsp; &nbsp;120&nbsp; &nbsp;201&nbsp; &nbsp;210</p>
+<p>What is the millionth lexicographic permutation of the digits 0, 1, 2, 3, 4, 5, 6, 7, 8 and 9?</p>
+</div>
+<div id="result"></div>
+<button onclick="calculate()">Click to calculate solution</button>
+</body>
+</html>

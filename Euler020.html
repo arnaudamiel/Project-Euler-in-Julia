@@ -1,0 +1,88 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<title>Project Euler 020</title>
+
+<script language="Javascript">
+
+function calculate() {
+
+    document.getElementById('result').innerHTML="Calculating ..."
+    setTimeout(function(){startSolver()},1);
+ 
+}
+
+function startSolver() {
+
+    var start = new Date().getTime();
+
+    var result = solve020();
+
+    var end = new Date().getTime();
+    var time = end - start;
+
+    document.getElementById('result').innerHTML="Found : "+result+" in "+time+" ms";
+
+}
+
+
+function solve020() {
+
+    var solveTo = 100;
+    var myDigits = [];
+    myDigits[0] = 1;
+ 
+    for (var i = 1; i <= solveTo; i++) {
+
+        var carry = 0;
+
+        for (j = 0; j < myDigits.length; j++) {
+
+            myDigits[j] *= i;
+            myDigits[j] += carry;
+
+            carry = 0;
+
+            if (myDigits[j] >= 10) {
+
+                carry = Math.floor(myDigits[j]/10);
+                myDigits[j] %= 10;
+
+            }
+        }
+
+        if (carry > 0)
+            myDigits[myDigits.length] = carry;
+
+        while (myDigits[(myDigits.length)-1] >= 10) {
+
+            myDigits[myDigits.length] = Math.floor(myDigits[(myDigits.length)-1]/10);
+            myDigits[(myDigits.length)-2] %= 10;
+
+        }
+    }
+
+    var counter = 0;
+
+    for (var i=0; i < myDigits.length; i++)
+        counter += myDigits[i];
+
+    return counter;
+
+}
+
+</script>
+
+</head>
+<body>
+<h1>Factorial digit sum</h1>
+<h2>Problem 20</h2>
+<div id="problem">
+<p><i>n</i>! means <i>n</i> &times; (<i>n</i> &minus; 1) &times; ... &times; 3 &times; 2 &times; 1</p>
+<p>For example, 10! = 10 &times; 9 &times; ... &times; 3 &times; 2 &times; 1 = 3628800,<br />and the sum of the digits in the number 10! is 3 + 6 + 2 + 8 + 8 + 0 + 0 = 27.</p>
+<p>Find the sum of the digits in the number 100!</p>
+</div>
+<div id="result"></div>
+<button onclick="calculate()">Click to calculate solution</button>
+</body>
+</html>

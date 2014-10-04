@@ -1,0 +1,83 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<title>Project Euler 032</title>
+
+<meta http-equiv="X-UA-Compatible" content="IE=Edge"/>
+
+<script language="Javascript">
+
+function calculate() {
+
+    document.getElementById('result').innerHTML="Calculating ..."
+    setTimeout(function(){startSolver()},1);
+ 
+}
+
+function startSolver() {
+
+    var start = new Date().getTime();
+
+    var result = solve032();
+
+    var end = new Date().getTime();
+    var time = end - start;
+
+    document.getElementById('result').innerHTML="Found : "+result+" in "+time+" ms";
+
+}
+
+function isPandigital(x) {
+
+    var y = x.split('');
+    y.sort();
+
+    return y.join('')=='123456789';
+
+}
+
+function solve032() {
+
+    var solveTo = 100;
+    var used = [];
+    var sum = 0;
+
+    for(var i=2; i<solveTo; i++) {
+
+        var len = String(i).length;
+
+        for(var j=10000/Math.pow(10,len); String(i).length+String(j).length+String(i*j).length <= 9; j++) {
+
+            var num = String(i)+String(j)+String(i*j);
+
+            if(isPandigital(num)) {
+
+                if(!used[i*j]) {
+
+                    sum += i*j;
+                    used[i*j] = true;
+
+                }
+            }
+        }
+    }
+
+    return sum;
+
+}
+
+</script>
+
+</head>
+<body>
+<h1>Pandigital products</h1>
+<h2>Problem 32</h2>
+<div id="problem">
+<p>We shall say that an <var>n</var>-digit number is pandigital if it makes use of all the digits 1 to <var>n</var> exactly once; for example, the 5-digit number, 15234, is 1 through 5 pandigital.</p>
+<p>The product 7254 is unusual, as the identity, 39 &times; 186 = 7254, containing multiplicand, multiplier, and product is 1 through 9 pandigital.</p>
+<p>Find the sum of all products whose multiplicand/multiplier/product identity can be written as a 1 through 9 pandigital.</p>
+</div>
+<div id="result"></div>
+<button onclick="calculate()">Click to calculate solution</button>
+</body>
+</html>

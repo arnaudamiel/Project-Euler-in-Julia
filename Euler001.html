@@ -5,33 +5,38 @@
 
 <script language="Javascript">
 
-function calculate()
-{
- document.getElementById('result').innerHTML="Calculating ..."
- setTimeout(function(){startSolver()},1);
- 
+function calculate() {
+
+    document.getElementById('result').innerHTML="Calculating ..."
+    setTimeout(function(){startSolver()},1);
 }
 
-function startSolver()
-{
- var start = new Date().getTime();
- var result = solve001();
- var end = new Date().getTime();
- var time = end - start;
- document.getElementById('result').innerHTML="Found : "+result+" in "+time+" ms";
+function startSolver() {
+
+    var start = new Date().getTime();
+
+    var result = solve001();
+
+    var end = new Date().getTime();
+    var time = end - start;
+
+    document.getElementById('result').innerHTML="Found : "+result+" in "+time+" ms";
+
 }
 
-function SumDivisibleBy(n,target)
-{
- var p = Math.floor(target/n);
- return Math.floor(n*(p*(p+1))/2);
+function SumDivisibleBy(n,target) {
+
+    var p = Math.floor(target/n);
+
+    return Math.floor(n*(p*(p+1))/2);
+
 }
 
-function solve001()
-{
- var solveTo = 1000-1;
+function solve001() {
 
- return SumDivisibleBy(3,solveTo)+SumDivisibleBy(5,solveTo)-SumDivisibleBy(15,solveTo);
+    var solveTo = 1000-1;
+
+    return SumDivisibleBy(3,solveTo)+SumDivisibleBy(5,solveTo)-SumDivisibleBy(15,solveTo);
  
 }
 

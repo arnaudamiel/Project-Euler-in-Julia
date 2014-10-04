@@ -5,41 +5,43 @@
 
 <script language="Javascript">
 
-function calculate()
-{
- document.getElementById('result').innerHTML="Calculating ..."
- setTimeout(function(){startSolver()},1);
- 
+function calculate() {
+
+    document.getElementById('result').innerHTML="Calculating ..."
+    setTimeout(function(){startSolver()},1);
 }
 
-function startSolver()
-{
- var start = new Date().getTime();
- var result = solve002();
- var end = new Date().getTime();
- var time = end - start;
- document.getElementById('result').innerHTML="Found : "+result+" in "+time+" ms";
+function startSolver() {
+
+    var start = new Date().getTime();
+
+    var result = solve002();
+
+    var end = new Date().getTime();
+    var time = end - start;
+
+    document.getElementById('result').innerHTML="Found : "+result+" in "+time+" ms";
 }
 
-function solve002()
-{
- var solveTo = 4000000;
+function solve002() {
 
- var fib2 = 2;
- var fib1 = 8;
- var fib = 34;
+    var solveTo = 4000000;
 
- var counter = 10;
+    var fib2 = 2;
+    var fib1 = 8;
+    var fib = 34;
+
+    var counter = 10;
  
- while (fib <= solveTo)
- {
-  counter += fib;
-  fib2 = fib1
-  fib1 = fib
-  fib = 4*fib1 + fib2
- }
+    while (fib <= solveTo) {
 
- return counter;
+        counter += fib;
+        fib2 = fib1
+        fib1 = fib
+        fib = 4*fib1 + fib2
+    }
+
+    return counter;
  
 }
 

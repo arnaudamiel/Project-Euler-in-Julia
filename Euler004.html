@@ -5,72 +5,82 @@
 
 <script language="Javascript">
 
-function calculate()
-{
- document.getElementById('result').innerHTML="Calculating ..."
- setTimeout(function(){startSolver()},1);
+function calculate() {
+
+    document.getElementById('result').innerHTML="Calculating ..."
+    setTimeout(function(){startSolver()},1);
  
 }
 
-function startSolver()
-{
- var start = new Date().getTime();
- var result = solve004();
- var end = new Date().getTime();
- var time = end - start;
- document.getElementById('result').innerHTML="Found : "+result+" in "+time+" ms";
+function startSolver() {
+
+    var start = new Date().getTime();
+
+    var result = solve004();
+
+    var end = new Date().getTime();
+    var time = end - start;
+
+    document.getElementById('result').innerHTML="Found : "+result+" in "+time+" ms";
 }
 
-function reverse(n)
-{
- var reversed = 0;
- while (n > 0)
- {
-  reversed = (10 * reversed) + (n % 10);
-  n = Math.floor(n/10);
- }
- return reversed;
+function reverse(n) {
+
+    var reversed = 0;
+
+    while (n > 0) {
+
+        reversed = (10 * reversed) + (n % 10);
+        n = Math.floor(n/10);
+    }
+
+    return reversed;
 }
 
-function isPalindrome(n)
-{
- return (n==reverse(n));
+function isPalindrome(n) {
+
+    return (n==reverse(n));
 }
 
-function solve004()
-{
- var largestPalindrome = 0;
- var a = 999;
- var b = 0;
- var db = 0;
+function solve004() {
 
- while (a >= 100)
- {
-  if (a % 11 == 0)
-  {
-   b = 999;
-   db = 1;
-  }
-  else
-  {
-   b = 990; //The largest number less than or equal 999 and divisible by 11
-   db = 11;
-  }
-  while (b >= a)
-  {
-   if ( a*b <= largestPalindrome )
-    break;
+    var largestPalindrome = 0;
+    var a = 999;
+    var b = 0;
+    var db = 0;
 
-   if (isPalindrome(a*b))
-    largestPalindrome = a*b;
+    while (a >= 100) {
 
-   b -= db;
-  }
+        if (a % 11 == 0) {
 
-  a--;
- }
+            b = 999;
+            db = 1;
+        }
 
- return largestPalindrome;
+        else {
+
+            b = 990; //The largest number less than or equal 999 and divisible by 11
+            db = 11;
+        }
+
+        while (b >= a) {
+
+            if ( a*b <= largestPalindrome )
+
+                break;
+
+            if (isPalindrome(a*b))
+
+                largestPalindrome = a*b;
+
+            b -= db;
+        }
+
+    a--;
+
+    }
+
+    return largestPalindrome;
 
 }
 

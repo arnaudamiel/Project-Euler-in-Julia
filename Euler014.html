@@ -5,62 +5,67 @@
 
 <script language="Javascript">
 
-function calculate()
-{
- document.getElementById('result').innerHTML="Calculating ..."
- setTimeout(function(){startSolver()},1);
+function calculate() {
+
+    document.getElementById('result').innerHTML="Calculating ..."
+    setTimeout(function(){startSolver()},1);
  
 }
 
-function startSolver()
-{
- var start = new Date().getTime();
- var result = solve014();
- var end = new Date().getTime();
- var time = end - start;
- document.getElementById('result').innerHTML="Found : "+result+" in "+time+" ms";
+function startSolver() {
+
+    var start = new Date().getTime();
+
+    var result = solve014();
+
+    var end = new Date().getTime();
+    var time = end - start;
+
+    document.getElementById('result').innerHTML="Found : "+result+" in "+time+" ms";
+
 }
 
 
-function solve014()
-{
- var solveTo = 1000000;
- var s;
- var c;
- var L = [];
+function solve014() {
 
- L[0] = 1;
+    var solveTo = 1000000;
+    var s;
+    var c;
+    var L = [];
 
- var mv = 1;
- var ms = 1;
+    L[0] = 1;
 
- for (var n = 2; n <= solveTo; n++)
- {
-  c = 0;
-  s = n;
+    var mv = 1;
+    var ms = 1;
 
-  do
-  {
-   c++;
+    for (var n = 2; n <= solveTo; n++) {
 
-   if ( s % 2 == 0)
-    s /= 2;
-   else
-    s = 3*s +1;
-  }
-  while ( s > n );
+        c = 0;
+        s = n;
 
-  L[n-1] = L[s-1] + c;
+        do {
 
-  if (L[n-1] > mv)
-  {
-   mv = L[n-1];
-   ms = n;
-  }
+            c++;
 
- }  
+            if ( s % 2 == 0)
+                s /= 2;
+            else
+                s = 3*s +1;
+        }
+        while ( s > n );
+
+        L[n-1] = L[s-1] + c;
+
+        if (L[n-1] > mv) {
+
+            mv = L[n-1];
+            ms = n;
+
+        }
+
+    }  
  
- return ms;
+    return ms;
 
 }
 

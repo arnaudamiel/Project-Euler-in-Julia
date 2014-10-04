@@ -5,102 +5,117 @@
 
 <script language="Javascript">
 
-function calculate()
-{
- document.getElementById('result').innerHTML="Calculating ..."
- setTimeout(function(){startSolver()},1);
+function calculate() {
+
+    document.getElementById('result').innerHTML="Calculating ..."
+    setTimeout(function(){startSolver()},1);
  
 }
 
-function startSolver()
-{
- var start = new Date().getTime();
- var result = solve012();
- var end = new Date().getTime();
- var time = end - start;
- document.getElementById('result').innerHTML="Found : "+result+" in "+time+" ms";
+function startSolver() {
+
+    var start = new Date().getTime();
+
+    var result = solve012();
+
+    var end = new Date().getTime();
+    var time = end - start;
+
+    document.getElementById('result').innerHTML="Found : "+result+" in "+time+" ms";
+
 }
 
-function eratosthenes(limit)
-{
- var primes = [];
- if (limit >= 2)
- {
-  var sqrtlmt = Math.sqrt(limit) - 2;
-  var nums = new Array(); // start with an empty Array...
-  for (var i = 2; i <= limit; i++) // and
-   nums.push(i); // only initialize the Array once...
-  for (var i = 0; i <= sqrtlmt; i++)
-  {
-   var p = nums[i]
-   if (p)
-    for (var j = p * p - 2; j < nums.length; j += p)
-     nums[j] = 0;
-  }
-  for (var i = 0; i < nums.length; i++)
-  {
-   var p = nums[i];
-   if (p)
-    primes.push(p);
-  }
- }
- return primes;
+function eratosthenes(limit) {
+
+    var primes = [];
+
+    if (limit >= 2) {
+
+        var sqrtlmt = Math.sqrt(limit) - 2;
+        var nums = new Array(); // start with an empty Array...
+        for (var i = 2; i <= limit; i++) // and
+            nums.push(i); // only initialize the Array once...
+
+        for (var i = 0; i <= sqrtlmt; i++) {
+
+            var p = nums[i];
+
+            if (p)
+                for (var j = p * p - 2; j < nums.length; j += p)
+                    nums[j] = 0;
+        }
+
+        for (var i = 0; i < nums.length; i++) {
+
+            var p = nums[i];
+
+            if (p)
+                primes.push(p);
+        }
+
+    }
+
+    return primes;
 }
 
-function solve012()
-{
- var solveTo = 500;
- var myPrimes = eratosthenes(2*solveTo);
+function solve012() {
 
- var n = 3;
- var Dn = 2;
- var cnt = 0;
- var n1;
- var Dn1;
- var i;
- var exponent;
+    var solveTo = 500;
+    var myPrimes = eratosthenes(2*solveTo);
 
- while (cnt <= solveTo)
- {
-  n++;
-  n1 = n;
-  if (n1 % 2 ==0 )
-   n1 /= 2;
-  Dn1 = 1;
+    var n = 3;
+    var Dn = 2;
+    var cnt = 0;
+    var n1;
+    var Dn1;
+    var i;
+    var exponent;
 
-  for ( i=0; i < myPrimes.length; i++)
-  {
-   if (myPrimes[i] * myPrimes[i] > n1)
-   {
-    Dn1 *= 2;
-    break;
-   }
+    while (cnt <= solveTo) {
 
-   //When the prime divisor would be greater than the residual n1,
-   //that residual n1 is the last prime factor with an exponent=1
-   //No necessity to identify it.
+        n++;
+        n1 = n;
 
-   exponent = 1;
+        if (n1 % 2 ==0 )
+            n1 /= 2;
 
-   while (n1 % myPrimes[i] == 0)
-   {
-    exponent++;
-    n1 /= myPrimes[i];
-   }
+        Dn1 = 1;
 
-   if (exponent > 1)
-    Dn1 *= exponent;
+        for ( i=0; i < myPrimes.length; i++) {
 
-   if (n1 == 1)
-    break;
+            if (myPrimes[i] * myPrimes[i] > n1) {
 
-  }
+                Dn1 *= 2;
+                break;
 
-  cnt = Dn*Dn1;
-  Dn = Dn1;
- }
+            }
 
- return n*(n-1)/2;
+            //When the prime divisor would be greater than the residual n1,
+            //that residual n1 is the last prime factor with an exponent=1
+            //No necessity to identify it.
+
+            exponent = 1;
+
+            while (n1 % myPrimes[i] == 0) {
+
+                 exponent++;
+                 n1 /= myPrimes[i];
+             }
+
+             if (exponent > 1)
+                 Dn1 *= exponent;
+
+             if (n1 == 1)
+                 break;
+
+         }
+
+         cnt = Dn*Dn1;
+         Dn = Dn1;
+
+    }
+
+    return n*(n-1)/2;
 
 }
 

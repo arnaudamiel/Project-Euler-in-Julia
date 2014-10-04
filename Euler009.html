@@ -5,88 +5,96 @@
 
 <script language="Javascript">
 
-function calculate()
-{
- document.getElementById('result').innerHTML="Calculating ..."
- setTimeout(function(){startSolver()},1);
+function calculate() {
+
+    document.getElementById('result').innerHTML="Calculating ..."
+    setTimeout(function(){startSolver()},1);
  
 }
 
-function startSolver()
-{
- var start = new Date().getTime();
- var result = solve009();
- var end = new Date().getTime();
- var time = end - start;
- document.getElementById('result').innerHTML="Found : "+result+" in "+time+" ms";
+function startSolver() {
+
+    var start = new Date().getTime();
+
+    var result = solve009();
+
+    var end = new Date().getTime();
+    var time = end - start;
+
+    document.getElementById('result').innerHTML="Found : "+result+" in "+time+" ms";
+
 }
 
-function gcd(a,b)
-{
- if (a < 0)
-  a = -a;
+function gcd(a,b) {
 
- if (b < 0)
-  b = -b;
+    if (a < 0)
+        a = -a;
 
- if (b > a)
- {
-  var temp = a;
-  a = b;
-  b = temp;
- }
+    if (b < 0)
+        b = -b;
 
- while (true)
- {
-  a %= b;
-  if (a == 0)
-   return b;
-  b %= a;
-  if (b == 0)
-   return a;
- }
-}
+    if (b > a) {
 
-
-function solve009()
-{
- var solveTo = 1000;
-
- var s2 = Math.floor(solveTo/2);
- var mlimit = Math.ceil(Math.sqrt(s2))-1;
-
- for (var m = 2; m <= mlimit; m++)
- {
-  if (s2 % m == 0)
-  {
-   var sm = s2 / m;
-
-   while (sm % 2 == 0) //reduce the search space by
-    sm /= 2; //removing all factors 2
-
-   if (m % 2 == 1)
-    var k = m+2;
-   else
-    var k = m+1;
-
-   while ( (k < 2+m) && (k <= sm) )
-   {
-    if ( (sm % k == 0) && (gcd(k,m) == 1))
-    {
-     var d = s2/(k*m);
-     var n = k-m;
-     var a = d*(m*m - n*n);
-     var b = 2*d*m*n;
-     var c = d*(m*m + n*n)
-
-     return (a*b*c);
+        var temp = a;
+        a = b;
+        b = temp;
     }
-    k +=2;
-   }
 
-  }
+    while (true) {
 
- }
+        a %= b;
+
+        if (a == 0)
+            return b;
+
+        b %= a;
+
+        if (b == 0)
+            return a;
+    }
+}
+
+
+function solve009() {
+
+    var solveTo = 1000;
+
+    var s2 = Math.floor(solveTo/2);
+    var mlimit = Math.ceil(Math.sqrt(s2))-1;
+
+    for (var m = 2; m <= mlimit; m++) {
+
+        if (s2 % m == 0) {
+
+            var sm = s2 / m;
+
+            while (sm % 2 == 0) //reduce the search space by
+                sm /= 2; //removing all factors 2
+
+            if (m % 2 == 1)
+                var k = m+2;
+            else
+                var k = m+1;
+
+            while ( (k < 2+m) && (k <= sm) ) {
+
+                if ( (sm % k == 0) && (gcd(k,m) == 1)) {
+
+                    var d = s2/(k*m);
+                    var n = k-m;
+                    var a = d*(m*m - n*n);
+                    var b = 2*d*m*n;
+                    var c = d*(m*m + n*n)
+
+                    return (a*b*c);
+                }
+
+                k +=2;
+            }
+
+        }
+
+    }
 
 }
 

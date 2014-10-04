@@ -5,32 +5,36 @@
 
 <script language="Javascript">
 
-function calculate()
-{
- document.getElementById('result').innerHTML="Calculating ..."
- setTimeout(function(){startSolver()},1);
+function calculate() {
+
+    document.getElementById('result').innerHTML="Calculating ..."
+    setTimeout(function(){startSolver()},1);
  
 }
 
-function startSolver()
-{
- var start = new Date().getTime();
- var result = solve015();
- var end = new Date().getTime();
- var time = end - start;
- document.getElementById('result').innerHTML="Found : "+result+" in "+time+" ms";
+function startSolver() {
+
+    var start = new Date().getTime();
+
+    var result = solve015();
+
+    var end = new Date().getTime();
+    var time = end - start;
+
+    document.getElementById('result').innerHTML="Found : "+result+" in "+time+" ms";
+
 }
 
 
-function solve015()
-{
- var solveTo = 20;
- var result = 1;
+function solve015() {
 
- for (var i=1; i <= solveTo; i++)
-  result *= (solveTo+i)/i;
+    var solveTo = 20;
+    var result = 1;
+
+    for (var i=1; i <= solveTo; i++)
+        result *= (solveTo+i)/i;
  
- return Math.round(result);
+    return Math.round(result);
 
 }
 

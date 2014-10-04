@@ -5,59 +5,67 @@
 
 <script language="Javascript">
 
-function calculate()
-{
- document.getElementById('result').innerHTML="Calculating ..."
- setTimeout(function(){startSolver()},1);
+function calculate() {
+
+    document.getElementById('result').innerHTML="Calculating ..."
+    setTimeout(function(){startSolver()},1);
  
 }
 
-function startSolver()
-{
- var start = new Date().getTime();
- var result = solve003();
- var end = new Date().getTime();
- var time = end - start;
- document.getElementById('result').innerHTML="Found : "+result+" in "+time+" ms";
+function startSolver() {
+
+    var start = new Date().getTime();
+
+    var result = solve003();
+
+    var end = new Date().getTime();
+    var time = end - start;
+
+    document.getElementById('result').innerHTML="Found : "+result+" in "+time+" ms";
 }
 
-function solve003()
-{
- var solveTo = 600851475143;
- var lastFactor = 1;
+function solve003() {
 
- if (solveTo % 2 == 0)
- {
-   lastFactor = 2;
-   solveTo /= 2;
+    var solveTo = 600851475143;
+    var lastFactor = 1;
 
-   while (solveTo % 2 == 0)
-    solveTo /= 2;
-  }
-  else
-   lastFactor = 1;
+    if (solveTo % 2 == 0)  {
 
- var factor = 3;
- var maxFactor = Math.floor(Math.sqrt(solveTo))
+        lastFactor = 2;
+        solveTo /= 2;
 
- while ( (solveTo > 1) && (factor<=maxFactor) )
- {
-  if (solveTo % factor == 0)
-  {
-   solveTo /= factor;
-   lastFactor = factor;
+        while (solveTo % 2 == 0)
 
-   while (solveTo % factor == 0)
-    solveTo /= factor;
-  }
+            solveTo /= 2;
+    }
+    else
 
-  factor += 2;
- }
+        lastFactor = 1;
 
- if (solveTo == 1)
-  return lastFactor;
- else
-  return solveTo;
+    var factor = 3;
+    var maxFactor = Math.floor(Math.sqrt(solveTo))
+
+    while ( (solveTo > 1) && (factor<=maxFactor) ) {
+
+        if (solveTo % factor == 0) {
+
+            solveTo /= factor;
+            lastFactor = factor;
+
+            while (solveTo % factor == 0)
+
+                solveTo /= factor;
+        }
+
+        factor += 2;
+    }
+
+    if (solveTo == 1)
+
+        return lastFactor;
+    else
+
+        return solveTo;
 
 }
 

@@ -1,0 +1,101 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<title>Project Euler 017</title>
+
+<script language="Javascript">
+
+function calculate() {
+
+    document.getElementById('result').innerHTML="Calculating ..."
+    setTimeout(function(){startSolver()},1);
+ 
+}
+
+function startSolver() {
+
+    var start = new Date().getTime();
+
+    var result = solve017();
+
+    var end = new Date().getTime();
+    var time = end - start;
+
+    document.getElementById('result').innerHTML="Found : "+result+" in "+time+" ms";
+
+}
+
+function numToWord(n) {
+
+    var oneToTeen = ['','one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine','ten'];
+    oneToTeen.push('eleven', 'twelve', 'thirteen', 'fourteen', 'fifteen', 'sixteen', 'seventeen', 'eighteen', 'nineteen');
+
+    var tys = ['','','twenty','thirty', 'forty', 'fifty', 'sixty', 'seventy', 'eighty', 'ninety'];
+    var hundreds = ['','','hundred','thousand'];
+
+    var numStr = n.toString();
+
+    var a = [];
+    var p = Math.pow(10 , n.toString().length - 1);
+
+    //lets start finding thousands and hundreds
+    while ( p >= 100 ) {
+
+        if (( p == 1000 ) || ( p == 100 )) {
+
+            a.push(oneToTeen[parseInt(n/p)]);
+            a.push(hundreds[p.toString().length - 1]);
+
+            n %= p;
+            p = Math.pow(10, n.toString().length - 1);
+
+        }
+    }
+
+    // now everything less than 100
+    if ( (a.length > 0) && (n > 0) )
+        a.push("and");
+
+    if ( n >= 20 ) {
+
+        a.push(tys[parseInt(n/p)]);
+
+        if ( n % p != 0 )
+            a.push(oneToTeen[n%p]);
+
+    }
+    else if ( n > 0 )
+        a.push(oneToTeen[n]);
+
+    return a;
+
+}
+
+function solve017() {
+
+    var solveTo = 1000;
+    var sum = 0;
+
+    for(var i=1; i <= solveTo; i++)
+        sum += numToWord(i).join('').length;
+
+    return sum;
+
+}
+
+</script>
+
+</head>
+<body>
+<h1>Number letter counts</h1>
+<h2>Problem 17</h2>
+<div id="problem">
+<p>If the numbers 1 to 5 are written out in words: one, two, three, four, five, then there are 3 + 3 + 5 + 4 + 4 = 19 letters used in total.</p>
+<p>If all the numbers from 1 to 1000 (one thousand) inclusive were written out in words, how many letters would be used? </p>
+<br />
+<p class="note"><b>NOTE:</b> Do not count spaces or hyphens. For example, 342 (three hundred and forty-two) contains 23 letters and 115 (one hundred and fifteen) contains 20 letters. The use of "and" when writing out numbers is in compliance with British usage.</p>
+</div>
+<div id="result"></div>
+<button onclick="calculate()">Click to calculate solution</button>
+</body>
+</html>

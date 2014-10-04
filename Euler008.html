@@ -5,47 +5,52 @@
 
 <script language="Javascript">
 
-function calculate()
-{
- document.getElementById('result').innerHTML="Calculating ..."
- setTimeout(function(){startSolver()},1);
+function calculate() {
+
+    document.getElementById('result').innerHTML="Calculating ..."
+    setTimeout(function(){startSolver()},1);
  
 }
 
-function startSolver()
-{
- var start = new Date().getTime();
- var result = solve008();
- var end = new Date().getTime();
- var time = end - start;
- document.getElementById('result').innerHTML="Found : "+result+" in "+time+" ms";
+function startSolver() {
+
+    var start = new Date().getTime();
+
+    var result = solve008();
+
+    var end = new Date().getTime();
+    var time = end - start;
+
+    document.getElementById('result').innerHTML="Found : "+result+" in "+time+" ms";
 }
 
-function solve008()
-{
- var theSeries = document.getElementById('series').innerText || document.getElementById('series').textContent;
- theSeries = theSeries.replace(/\s+/g, '');
- var nDigits = 13;
- var theDigits = [];
+function solve008() {
 
- var counter = 1;
- var MAXcounter = 1;
+    var theSeries = document.getElementById('series').innerText || document.getElementById('series').textContent;
+    theSeries = theSeries.replace(/\s+/g, '');
 
- for (var i=0; i<theSeries.length; i++)
-  theDigits.push(parseInt(theSeries.charAt(i))); 
+    var nDigits = 13;
+    var theDigits = [];
+
+    var counter = 1;
+    var MAXcounter = 1;
+
+    for (var i=0; i<theSeries.length; i++)
+        theDigits.push(parseInt(theSeries.charAt(i))); 
  
- for (var i=0; i<((theSeries.length)-nDigits); i++)
- {
-  counter = 1;
+    for (var i=0; i<((theSeries.length)-nDigits); i++) {
 
-  for (var j=0; j<nDigits; j++)
-   counter *=theDigits[i+j];
+        counter = 1;
 
-  if (counter > MAXcounter)
-   MAXcounter = counter;
- }
+        for (var j=0; j<nDigits; j++)
+            counter *=theDigits[i+j];
 
- return MAXcounter;
+        if (counter > MAXcounter)
+            MAXcounter = counter;
+    }
+
+    return MAXcounter;
+
 }
 
 </script>

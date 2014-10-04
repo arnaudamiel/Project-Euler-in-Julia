@@ -1,0 +1,66 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<title>Project Euler 031</title>
+
+<meta http-equiv="X-UA-Compatible" content="IE=Edge"/>
+
+<script language="Javascript">
+
+function calculate() {
+
+    document.getElementById('result').innerHTML="Calculating ..."
+    setTimeout(function(){startSolver()},1);
+ 
+}
+
+function startSolver() {
+
+    var start = new Date().getTime();
+
+    var result = solve031();
+
+    var end = new Date().getTime();
+    var time = end - start;
+
+    document.getElementById('result').innerHTML="Found : "+result+" in "+time+" ms";
+
+}
+
+
+function solve031() {
+
+    var solveTo = 200;
+    var coinSizes = [1,2,5,10,20,50,100,200];
+    var ways = [1];
+
+    for (var i=1; i <= solveTo; i++)
+        ways.push(0);
+
+
+
+    for (var i=0; i<coinSizes.length; i++)
+        for (var j=coinSizes[i]; j <= solveTo; j++)
+           ways[j] += ways[j-coinSizes[i]];
+
+    return ways[solveTo];
+
+}
+
+</script>
+
+</head>
+<body>
+<h1>>Coin sums</h1>
+<h2>Problem 31</h2>
+<div id="problem">
+<p>In England the currency is made up of pound, &pound;, and pence, p, and there are eight coins in general circulation:</p>
+<blockquote>1p, 2p, 5p, 10p, 20p, 50p, &pound;1 (100p) and &pound;2 (200p).</blockquote>
+<p>It is possible to make &pound;2 in the following way:</p>
+<blockquote>1&times;&pound;1 + 1&times;50p + 2&times;20p + 1&times;5p + 1&times;2p + 3&times;1p</blockquote>
+<p>How many different ways can &pound;2 be made using any number of coins?</p>
+</div>
+<div id="result"></div>
+<button onclick="calculate()">Click to calculate solution</button>
+</body>
+</html>

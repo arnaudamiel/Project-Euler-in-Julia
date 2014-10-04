@@ -5,53 +5,63 @@
 
 <script language="Javascript">
 
-function calculate()
-{
- document.getElementById('result').innerHTML="Calculating ..."
- setTimeout(function(){startSolver()},1);
+function calculate() {
+
+    document.getElementById('result').innerHTML="Calculating ..."
+    setTimeout(function(){startSolver()},1);
  
 }
 
-function startSolver()
-{
- var start = new Date().getTime();
- var result = solve016();
- var end = new Date().getTime();
- var time = end - start;
- document.getElementById('result').innerHTML="Found : "+result+" in "+time+" ms";
+function startSolver() {
+
+    var start = new Date().getTime();
+
+    var result = solve016();
+
+    var end = new Date().getTime();
+    var time = end - start;
+
+    document.getElementById('result').innerHTML="Found : "+result+" in "+time+" ms";
 }
 
 
-function solve016()
-{
- var myDigits = [];
+function solve016() {
 
- myDigits[0] = 2;
+    var myDigits = [];
+    myDigits[0] = 2;
  
- for (var i = 1; i < 1000; i++)
- {
-  var carry = 0;
-  for (j = 0; j < myDigits.length; j++)
-  {
-   myDigits[j] *= 2;
-   myDigits[j] += carry;
-   if (myDigits[j] >= 10)
-   {
-    myDigits[j] -= 10;
-    carry = 1;
-   }
-   else
-    carry = 0;
-  }
-  if (carry == 1)
-   myDigits[myDigits.length] = 1;
- }
+    for (var i = 1; i < 1000; i++) {
 
- var counter = 0;
- for (var i=0; i < myDigits.length; i++)
-  counter += myDigits[i];
+        var carry = 0;
 
- return counter;
+        for (j = 0; j < myDigits.length; j++) {
+
+            myDigits[j] *= 2;
+            myDigits[j] += carry;
+
+            if (myDigits[j] >= 10) {
+
+                myDigits[j] -= 10;
+                carry = 1;
+
+            }
+            else
+                carry = 0;
+
+        }
+
+        if (carry == 1)
+            myDigits[myDigits.length] = 1;
+
+    }
+
+    var counter = 0;
+
+    for (var i=0; i < myDigits.length; i++)
+        counter += myDigits[i];
+
+    return counter;
+
 }
 
 </script>
